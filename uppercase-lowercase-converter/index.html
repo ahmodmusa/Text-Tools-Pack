@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Text Tools Pack</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f7fa;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    h1 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    textarea {
+      width: 100%;
+      height: 150px;
+      margin: 10px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    button {
+      background: #4CAF50;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      margin: 5px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #45a049;
+    }
+    .output {
+      background: #f1f1f1;
+      padding: 10px;
+      margin-top: 15px;
+      border-radius: 5px;
+    }
+    .counter {
+      margin-top: 10px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🛠️ Text Tools Pack</h1>
+    <textarea id="inputText" placeholder="Enter your text here..."></textarea><br/>
+
+    <button onclick="toUpperCase()">🔠 UPPERCASE</button>
+    <button onclick="toLowerCase()">🔡 lowercase</button>
+    <button onclick="removeSpaces()">🧹 Remove Extra Spaces</button>
+    <button onclick="copyToClipboard()">📋 Copy Text</button>
+
+    <div class="counter" id="textStats"></div>
+
+    <div class="output">
+      <strong>Output:</strong>
+      <pre id="outputText"></pre>
+    </div>
+  </div>
+
+  <script>
+    const inputText = document.getElementById("inputText");
+    const outputText = document.getElementById("outputText");
+    const textStats = document.getElementById("textStats");
+
+    inputText.addEventListener("input", updateStats);
+
+    function updateStats() {
+      const text = inputText.value;
+      const wordCount = text.trim().split(/\s+/).filter(Boolean).length;
+      const charCount = text.length;
+      textStats.innerText = `📝 Words: ${wordCount} | 🔤 Characters: ${charCount}`;
+    }
+
+    function toUpperCase() {
+      const text = inputText.value.toUpperCase();
+      outputText.innerText = text;
+    }
+
+    function toLowerCase() {
+      const text = inputText.value.toLowerCase();
+      outputText.innerText = text;
+    }
+
+    function removeSpaces() {
+      const text = inputText.value.replace(/\s+/g, ' ').trim();
+      outputText.innerText = text;
+    }
+
+    function copyToClipboard() {
+      navigator.clipboard.writeText(outputText.innerText).then(() => {
+        alert("✅ Text copied to clipboard!");
+      });
+    }
+  </script>
+</body>
+</html>
